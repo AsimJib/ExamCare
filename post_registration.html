@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Successful</title>
-    <!-- Site favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -488,4 +486,155 @@
                     { label: 'Passing Year:', value: fetchedData.qualifications.tenth.passingYear },
                     { label: '12th Grade:', value: '' },
                     { label: 'Board:', value: fetchedData.qualifications.twelfth.board },
-      
+                    { label: 'Full Marks:', value: fetchedData.qualifications.twelfth.fullMarks },
+                    { label: 'Marks Obtained:', value: fetchedData.qualifications.twelfth.marksObtained },
+                    { label: 'Passing Year:', value: fetchedData.qualifications.twelfth.passingYear },
+                    { label: 'Graduation:', value: fetchedData.qualifications.graduation ? '' : null },
+                    { label: 'University:', value: fetchedData.qualifications.graduation ? fetchedData.qualifications.graduation.university : null },
+                    { label: 'Full Marks:', value: fetchedData.qualifications.graduation ? fetchedData.qualifications.graduation.fullMarks : null },
+                    { label: 'Marks Obtained:', value: fetchedData.qualifications.graduation ? fetchedData.qualifications.graduation.marksObtained : null },
+                    { label: 'Passing Year:', value: fetchedData.qualifications.graduation ? fetchedData.qualifications.graduation.passingYear : null },
+                ].filter(item => item.value !== null);
+
+                const initialY = yPosition + 10;
+                let currentY = initialY;
+                const increment = 10;
+
+                qualificationsData.forEach((item, index) => {
+                    // Add borders for each cell
+                    doc.rect(20, currentY - 5, 85, 10); // Left cell
+                    doc.rect(105, currentY - 5, 85, 10); // Right cell
+                    if (index % 2 === 0) {
+                        // Left column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 70, currentY + 2 + (i * 6));
+                        });
+                    } else {
+                        // Right column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 110, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 155, currentY + 2 + (i * 6));
+                        });
+                        currentY += increment; // Move to next line only after printing both columns
+                    }
+                });
+
+                return currentY + 10;
+            }
+
+            // Add post applied for details
+            function addPostAppliedDetails(doc, yPosition) {
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('Post Applied For', 20, yPosition);
+                doc.setFont('helvetica', 'normal');
+                const postData = [
+                    { label: 'Post:', value: fetchedData.postApplyingFor + (fetchedData.postApplyingFor === 'teacher' ? ` (${fetchedData.subject})` : '') },
+                ];
+
+                const initialY = yPosition + 10;
+                let currentY = initialY;
+                const increment = 10;
+
+                postData.forEach((item, index) => {
+                    // Add borders for each cell
+                    doc.rect(20, currentY - 5, 85, 10); // Left cell
+                    doc.rect(105, currentY - 5, 85, 10); // Right cell
+                    if (index % 2 === 0) {
+                        // Left column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 70, currentY + 2 + (i * 6));
+                        });
+                    } else {
+                        // Right column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 110, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 155, currentY + 2 + (i * 6));
+                        });
+                        currentY += increment; // Move to next line only after printing both columns
+                    }
+                });
+
+                return currentY + 10;
+            }
+
+            // Add registration details
+            function addRegistrationDetails(doc, yPosition) {
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('Registration Details', 20, yPosition);
+                doc.setFont('helvetica', 'normal');
+                const registrationData = [
+                    { label: 'Registration Number:', value: fetchedData.registrationNumber },
+                    { label: 'Payment ID:', value: fetchedData.paymentDetails.paymentId },
+                    { label: 'Payment Date, Time:', value: fetchedData.paymentDetails.paymentDate },
+                    { label: 'Total Amount Paid:', value: fetchedData.paymentDetails.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " INR" },
+                ];
+
+                const initialY = yPosition + 10;
+                let currentY = initialY;
+                const increment = 10;
+
+                registrationData.forEach((item, index) => {
+                    // Add borders for each cell
+                    doc.rect(20, currentY - 5, 85, 10); // Left cell
+                    doc.rect(105, currentY - 5, 85, 10); // Right cell
+                    if (index % 2 === 0) {
+                        // Left column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 70, currentY + 2 + (i * 6));
+                        });
+                    } else {
+                        // Right column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 110, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 155, currentY + 2 + (i * 6));
+                        });
+                        currentY += increment; // Move to next line only after printing both columns
+                    }
+                });
+
+                return currentY + 10;
+            }
+
+            let yPosition = addHeader(doc, 20);
+            yPosition = checkPageOverflow(yPosition, doc);
+            yPosition = addPersonalDetails(doc, yPosition);
+            yPosition = checkPageOverflow(yPosition, doc);
+            yPosition = addAddressDetails(doc, yPosition);
+            yPosition = checkPageOverflow(yPosition, doc);
+            yPosition = addQualificationsDetails(doc, yPosition);
+            yPosition = checkPageOverflow(yPosition, doc);
+            yPosition = addPostAppliedDetails(doc, yPosition);
+            yPosition = checkPageOverflow(yPosition, doc);
+            yPosition = addRegistrationDetails(doc, yPosition);
+
+            // Add note and footer
+            doc.setLineWidth(0.5);
+            doc.line(20, yPosition + 15, 190, yPosition + 15);
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Note:', 20, yPosition + 28);
+            doc.setFont('helvetica', 'normal');
+            doc.text('This is an electronically generated document. No signature is required.', 105, yPosition + 28, null, null, 'center');
+            doc.text('For any issue/assistance please write to the ExamCare team at support@examcare.in', 105, yPosition + 38, null, null, 'center');
+
+            // Save PDF and hide loader after saving
+            console.log('Saving PDF'); // Debug log
+            doc.save('Application.pdf');
+            hideLoader(); // Hide loader after saving
+        }
+    </script>
+</body>
+</html>
