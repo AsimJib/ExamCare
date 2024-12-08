@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            color: #333;
+            overflow-y: auto; /* Make the body scrollable */
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        .section h1, .section h2 {
+            color: #1878f3;
+        }
+        .section p {
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #1878f3;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer.
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        /* Adjusted Loader CSS */
+        .loader {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .sticky-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #1878f3;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-menu ul li {
+    display: inline;
+}
+
+.nav-menu ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-menu ul li a:hover {
+    background-color: #45a049;
+}
+
+.cta-button {
+    background-color: #007BFF;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.hamburger-menu span {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin-bottom: 4px;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader"></div> <!-- Loader element -->
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">ExamCare</a>
+            </div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+        <div class="section">
+            <h2>Registration Successful!</h2>
+            <p>Full Name: <strong id="fullName"></strong></p>
+            <p>Mobile Number: <strong id="mobileNumber"></strong></p>
+            <p>Email: <strong id="email"></strong></p>
+            <h2>Payment Details</h2>
+            <p>Payment ID: <strong id="paymentId"></strong></p>
+            <p>Payment Date & Time: <strong id="paymentDate"></strong></p>
+            <p>Total Amount Paid: <strong id="amount"></strong></p>
+            <h2>Registration Number</h2>
+            <p>Your registration number is <strong id="registrationNumber"></strong></p>
+            <button class="button" onclick="printPaymentSlip()">Download Payment Slip</button>
+            <button class="button" onclick="downloadApplication()">Download Application Form</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCM79WYeS4p0PpHkw1l3q6Kt5MY0Jdub6s",
+            authDomain: "examcare-app-manager.firebaseapp.com",
+            databaseURL: "https://examcare-app-manager.firebaseio.com",
+            projectId: "examcare-app-manager",
+            storageBucket: "examcare-app-manager.appspot.com",
+            messagingSenderId: "1078639810324",
+            appId: "1:1078639810324:web:b8929f9719cd39fd959401"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Global variable to store fetched data
+        let fetchedData = null;
+
+        // Get registration details from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const registrationNumber = urlParams.get('registrationNumber');
+        console.log('Registration Number:', registrationNumber); // Debug log
+
+        // Fetch user data from Firebase
+        const ref = firebase.database().ref(`Registered Users/${registrationNumber}`);
+        ref.once('value').then((snapshot) => {
+            console.log('Snapshot:', snapshot); // Debug log
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                fetchedData = data; // Store data globally
+                console.log('Fetched Data:', data); // Log the data to check if it's fetched correctly
+                
+                document.getElementById('fullName').textContent = data.fullName;
+                document.getElementById('mobileNumber').textContent = data.mobileNumber;
+                document.getElementById('email').textContent = data.email;
+                document.getElementById('paymentId').textContent = data.paymentDetails.paymentId;
+                document.getElementById('paymentDate').textContent = data.paymentDetails.paymentDate;
+                document.getElementById('amount').textContent = `${data.paymentDetails.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} INR`;
+                document.getElementById('registrationNumber').textContent = data.registrationNumber;
+            } else {
+                console.warn('Registration details not found for:', registrationNumber); // Warn log
+                alert('Registration details not found.');
+            }
+        }).catch((error) => {
+            console.error('Error retrieving data:', error); // Error log
+        });
+
+        // Function to show loader
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+        }
+
+        // Function to hide loader
+        function hideLoader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+
+        // Function to toggle menu visibility
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+        // Function to print payment slip
+        function printPaymentSlip() {
+            if (!fetchedData) {
+                console.error('No data fetched.'); // Error log
+                return;
+            }
+
+            showLoader(); // Show loader
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add header
+            doc.setFontSize(26);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(0);
+            doc.text('ExamCare', 105, 20, null, null, 'center');
+            doc.setFontSize(18);
+            doc.text('A Family of Learning', 105, 30, null, null, 'center');
+            
+            // Add divider
+            doc.setLineWidth(0.5);
+            doc.line(20, 35, 190, 35);
+
+            // Add "Payment Slip" title
+            doc.setFontSize(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Payment Slip', 105, 45, null, null, 'center');
+
+            // Add table content with borders
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0);
+            const tableData = [
+                { title: 'Registration Number', value: fetchedData.registrationNumber, isHighlight: true },
+                { title: 'Full Name', value: fetchedData.fullName },
+                { title: 'Mobile Number', value: fetchedData.mobileNumber },
+                { title: 'Email', value: fetchedData.email },
+                { title: 'Payment ID', value: fetchedData.paymentDetails.paymentId },
+                { title: 'Payment Date, Time', value: fetchedData.paymentDetails.paymentDate },
+                { title: 'Total Amount Paid', value: `${fetchedData.paymentDetails.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} INR` },
+                { title: 'Post Applied For', value: fetchedData.postApplyingFor + (fetchedData.postApplyingFor === 'teacher' ? ` (${fetchedData.subject})` : '') }
+            ];
+
+            let y = 55;
+            tableData.forEach((item) => {
+                doc.rect(20, y - 5, 85, 10); // Left cell
+                doc.rect(105, y - 5, 85, 10); // Right cell
+                doc.setFont('helvetica', 'bold');
+                doc.text(`${item.title}:`, 25, y + 2); // Adjusted vertical alignment
+                doc.setFont('helvetica', 'normal');
+                const textLines = doc.splitTextToSize(item.value, 75); // Split text for wrapping
+                textLines.forEach((line, index) => {
+                    doc.text(line, 110, y + 2 + (index * 6)); // Adjusted vertical alignment and added line height
+                });
+                y += 10;
+            });
+
+            // Add a horizontal line and note at the bottom
+            doc.line(20, y + 15, 190, y + 15);
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Note:', 20, y + 28);
+            doc.setFont('helvetica', 'normal');
+            doc.text('This is an electronically generated document. No signature is required.', 105, y + 28, null, null, 'center');
+            doc.text('For any issue/assistance please write to the ExamCare team at support@examcare.in', 105, y + 38, null, null, 'center');
+
+            // Save PDF and hide loader after saving
+            doc.save('Payment_Slip.pdf');
+            hideLoader(); // Hide loader after saving
+        }
+        // Function to download application in CV format
+        function downloadApplication() {
+            if (!fetchedData) {
+                console.error('No data fetched.'); // Error log
+                hideLoader(); // Hide loader
+                return;
+            }
+
+            showLoader(); // Show loader
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const pageHeight = doc.internal.pageSize.height;
+
+            // Add header function
+            function addHeader(doc, yPosition) {
+                doc.setFontSize(26);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('ExamCare', 105, yPosition, null, null, 'center');
+                doc.setFontSize(18);
+                doc.text('A Family of Learning', 105, yPosition + 10, null, null, 'center');
+                doc.setLineWidth(0.5);
+                doc.line(20, yPosition + 15, 190, yPosition + 15);
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Application', 105, yPosition + 25, null, null, 'center');
+                return yPosition + 35;
+            }
+
+            // Add personal details
+            function addPersonalDetails(doc, yPosition) {
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('Personal Details', 20, yPosition);
+                doc.setFont('helvetica', 'normal');
+                const personalData = [
+                    { label: 'Full Name:', value: fetchedData.fullName },
+                    { label: 'Father\'s Name:', value: fetchedData.fathersName },
+                    { label: 'Gender:', value: fetchedData.gender },
+                    { label: 'Date of Birth:', value: fetchedData.dob },
+                    { label: 'Mobile Number:', value: fetchedData.mobileNumber },
+                    { label: 'Email:', value: fetchedData.email },
+                    { label: 'Aadhaar Number:', value: fetchedData.aadhaarNumber },
+                    { label: 'Religion:', value: fetchedData.religion },
+                    { label: 'Caste:', value: fetchedData.caste },
+                    { label: 'Languages:', value: fetchedData.languages.join(', ') },
+                ];
+
+                const initialY = yPosition + 10;
+                let currentY = initialY;
+                const increment = 10;
+
+                personalData.forEach((item, index) => {
+                    // Add borders for each cell
+                    doc.rect(20, currentY - 5, 85, 10); // Left cell
+                    doc.rect(105, currentY - 5, 85, 10); // Right cell
+                    if (index % 2 === 0) {
+                        // Left column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 70, currentY + 2 + (i * 6));
+                        });
+                    } else {
+                        // Right column
+                        const textLines = doc.splitTextToSize(item.value, 60);
+                        doc.text(item.label, 110, currentY + 2, { baseline: 'middle' });
+                        textLines.forEach((line, i) => {
+                            doc.text(line, 155, currentY + 2 + (i * 6));
+                        });
+                        currentY += increment; // Move to next line only after printing both columns
+                    }
+                });
+
+                return currentY + 10;
+            }
+
+            // Add address details
+            function addAddressDetails(doc, yPosition) {
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('Address Details', 20, yPosition);
+                doc.setFont('helvetica', 'normal');
+                const addressData = [
+                    { label: 'Present Address:', value: '' },
+                    { label: 'Village:', value: fetchedData.presentAddress.village },
+                    { label: 'Post Office:', value: fetchedData.presentAddress.postOffice },
+                    { label: 'Police Station:', value: fetchedData.presentAddress.policeStation },
+                    { label: 'District:', value: fetchedData.presentAddress.district },
+                    { label: 'State:', value: fetchedData.presentAddress.state },
+                    { label: 'Pin Code:', value: fetchedData.presentAddress.pinCode },
+                    { label: 'Permanent Address:', value: '' },
+                    { label: 'Village:', value: fetchedData.permanentAddress.village },
+                    { label: 'Post Office:', value: fetchedData.permanentAddress.postOffice },
+                    { label: 'Police Station:', value: fetchedData.permanentAddress.policeStation },
+                    { label: 'District:', value: fetchedData.permanentAddress.district },
+                    { label: 'State:', value: fetchedData.permanentAddress.state },
+                    { label: 'Pin Code:', value: fetchedData.permanentAddress.pinCode },
+                ];
+
+                const initialY = yPosition + 10;
+                let currentY = initialY;
+                const increment = 10;
+
+                addressData.forEach((item, index) => {
+                    // Add borders for each cell
+                    doc.rect(20, currentY - 5, 85, 10); // Left cell
+                    doc.rect(105, currentY - 5, 85, 10); // Right cell
+                    if (index === 0 || index === 7) {
+                        // Section headers
+                        doc.setFont('helvetica', 'bold');
+                        doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                        currentY += increment;
+                        doc.setFont('helvetica', 'normal');
+                    } else {
+                        if (index % 2 === 1) {
+                            // Left column
+                            const textLines = doc.splitTextToSize(item.value, 60);
+                            doc.text(item.label, 25, currentY + 2, { baseline: 'middle' });
+                            textLines.forEach((line, i) => {
+                                doc.text(line, 70, currentY + 2 + (i * 6));
+                            });
+                        } else {
+                            // Right column
+                            const textLines = doc.splitTextToSize(item.value, 60);
+                            doc.text(item.label, 110, currentY + 2, { baseline: 'middle' });
+                            textLines.forEach((line, i) => {
+                                doc.text(line, 155, currentY + 2 + (i * 6));
+                            });
+                            currentY += increment; // Move to next line only after printing both columns
+                        }
+                    }
+                });
+
+                return currentY + 10;
+            }
+            // Check if adding a new section would overflow the page
+            function checkPageOverflow(yPosition, doc) {
+                if (yPosition > pageHeight - 30) {
+                    doc.addPage();
+                    return addHeader(doc, 20);
+                }
+                return yPosition;
+            }
+
+            // Add qualifications details
+            function addQualificationsDetails(doc, yPosition) {
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0);
+                doc.text('Qualifications', 20, yPosition);
+                doc.setFont('helvetica', 'normal');
+                const qualificationsData = [
+                    { label: '10th Grade:', value: '' },
+                    { label: 'Board:', value: fetchedData.qualifications.tenth.board },
+                    { label: 'Full Marks:', value: fetchedData.qualifications.tenth.fullMarks },
+                    { label: 'Marks Obtained:', value: fetchedData.qualifications.tenth.marksObtained },
+                    { label: 'Passing Year:', value: fetchedData.qualifications.tenth.passingYear },
+                    { label: '12th Grade:', value: '' },
+                    { label: 'Board:', value: fetchedData.qualifications.twelfth.board },
+      
