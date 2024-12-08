@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Failed</title>
+    <!-- Site favicon -->
+        <link rel="shortcut icon" href="images/favicon.ico" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -136,7 +138,7 @@
     <header class="sticky-header">
         <div class="header-container">
             <div class="logo">
-                <a href="index.html">ExamCare</a>
+                <a href="/">ExamCare</a>
             </div>
             
             </nav>
@@ -147,19 +149,19 @@
         <h1>Payment Failed</h1>
         <p>Unfortunately, your payment was not successful. Please try again or contact our support team for assistance.</p>
         <div>
-            <button class="button" onclick="retryPayment()">Retry Payment</button>
+            <button class="button" onclick="retryPayment()">Go Back</button>
             <button class="button" onclick="contactSupport()">Contact Support</button>
         </div>
     </div>
     <script>
         function retryPayment() {
             // Redirect to the payment page or reinitiate payment process
-            window.location.href = 'your_payment_page.html';
+            window.location.href = 'pre_application_modal.html';
         }
 
         function contactSupport() {
             // Redirect to the contact support page or open support form
-            window.location.href = 'contact_support.html';
+            window.location.href = 'mailto:support@examcare.in';
         }
     </script>
 </body>
