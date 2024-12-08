@@ -103,7 +103,7 @@ document.getElementById('dob').addEventListener('change', validateDOB);
 function initiatePayment(amount) {
     const post = document.getElementById('postApplyingFor').value;
     var options = {
-        "key": "rzp_test_Biw7k35dT7rhHS", // Enter the Key ID generated from the Dashboard
+        "key": "rzp_live_8YOmfybg2mEz3i", // Enter the Key ID generated from the Dashboard
         "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, multiplying by 100
         "currency": "INR",
         "name": "Your Company Name",
