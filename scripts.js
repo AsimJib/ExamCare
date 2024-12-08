@@ -235,7 +235,7 @@ function storeFormData(paymentId) {
                 ref.set(formData).then(() => {
                         console.log('Data saved successfully. Redirecting to registration successful page...');
                         // Redirect to the 'Registration Successful' page
-                        window.location.href = `registration_successful.html?registrationNumber=${registrationNumber}`;
+                        window.location.href = `post_registration.html?registrationNumber=${registrationNumber}`;
                     }).catch((error) => {
                         console.error('Error saving data:', error);
                     });
