@@ -13,6 +13,65 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+// Function to scroll to the top of a section
+function scrollToTop(elementId) {
+    document.getElementById(elementId).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Navigation between form sections
+document.getElementById('continue1').addEventListener('click', function() {
+    if (validateSection('part1')) {
+        document.getElementById('part1').style.display = 'none';
+        document.getElementById('part2').style.display = 'block';
+        document.getElementById('continue2').classList.remove('full-width');
+        document.getElementById('continue2').classList.add('half-width');
+        document.getElementById('prev2').style.display = 'inline-block';
+        scrollToTop('part2'); // Scroll to the top of part 2
+    }
+});
+
+document.getElementById('continue2').addEventListener('click', function() {
+    if (validateSection('part2')) {
+        document.getElementById('part2').style.display = 'none';
+        document.getElementById('part3').style.display = 'block';
+        document.getElementById('submit').classList.remove('full-width');
+        document.getElementById('submit').classList.add('half-width');
+        document.getElementById('prev3').style.display = 'inline-block';
+        scrollToTop('part3'); // Scroll to the top of part 3
+    }
+});
+
+document.getElementById('prev2').addEventListener('click', function() {
+    document.getElementById('part2').style.display = 'none';
+    document.getElementById('part1').style.display = 'block';
+    document.getElementById('continue2').classList.remove('half-width');
+    document.getElementById('continue2').classList.add('full-width');
+    document.getElementById('prev2').style.display = 'none';
+    scrollToTop('part1'); // Scroll to the top of part 1
+});
+
+document.getElementById('prev3').addEventListener('click', function() {
+    document.getElementById('part3').style.display = 'none';
+    document.getElementById('part2').style.display = 'block';
+    document.getElementById('submit').classList.remove('half-width');
+    document.getElementById('submit').classList.add('full-width');
+    document.getElementById('prev3').style.display = 'none';
+    scrollToTop('part2'); // Scroll to the top of part 2
+});
+
+// Function to validate form section
+function validateSection(sectionId) {
+    const inputs = document.querySelectorAll(`#${sectionId} input, #${sectionId} select`);
+    for (let input of inputs) {
+        if (!input.checkValidity()) {
+            alert(`Please fill out the ${input.name} field.`);
+            return false;
+        }
+    }
+    return true;
+}
+
+// Copy sameAsPresent address fields
 document.getElementById('sameAsPresent').addEventListener('change', function() {
     if (this.checked) {
         document.getElementById('permanentVillage').value = document.getElementById('presentVillage').value;
@@ -29,6 +88,7 @@ document.getElementById('sameAsPresent').addEventListener('change', function() {
     }
 });
 
+// Display subject and qualifications based on post
 document.getElementById('postApplyingFor').addEventListener('change', function() {
     const post = this.value;
     const subjectField = document.getElementById('subjectField');
@@ -38,8 +98,6 @@ document.getElementById('postApplyingFor').addEventListener('change', function()
     const qualificationGraduation = document.getElementById('qualificationGraduation');
     const qualificationsTitle = document.getElementById('qualificationsTitle');
     const totalPayable = document.getElementById('totalPayable');
-
-    console.log('Selected post:', post);
 
     subjectField.style.display = (post === 'teacher') ? 'block' : 'none';
     qualificationsSection.style.display = (post !== '') ? 'block' : 'none';
@@ -55,10 +113,7 @@ document.getElementById('postApplyingFor').addEventListener('change', function()
 
     // Fetch and display the amount
     const chargeRef = firebase.database().ref(`Application Details/${post}/Apply Charge`);
-    console.log('Fetching data from path:', `Application Details/${post}/Apply Charge`);
     chargeRef.once('value').then((snapshot) => {
-        console.log('Snapshot exists:', snapshot.exists());
-        console.log('Snapshot value:', snapshot.val());
         if (snapshot.exists()) {
             totalPayable.textContent = `Total Payable Amount: ₹${snapshot.val()}`;
             totalPayable.style.display = 'block'; // Display the label
@@ -106,9 +161,9 @@ function initiatePayment(amount) {
         "key": "rzp_live_8YOmfybg2mEz3i", // Enter the Key ID generated from the Dashboard
         "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, multiplying by 100
         "currency": "INR",
-        "name": "Your Company Name",
+        "name": "ExamCare",
         "description": `Payment for ${post}`, // Updated description
-        "image": "https://example.com/your_logo",
+        "image": "https://i.ibb.co/mBYBT3b/reader-g95b106554-1280-1.png",
         "handler": handlePaymentSuccess,
         "prefill": {
             "name": document.getElementById('fullName').value,
@@ -229,7 +284,7 @@ function storeFormData(paymentId) {
         ref.once('value').then((snapshot) => {
             if (snapshot.exists()) {
                 // If registration number already exists, generate a new one
-                saveDataWithUniqueRegistrationNumber(generateRegistrationNumber());
+                saveDataWithUniqueRegistrationNumber(Math.floor(100000000 + Math.random() * 900000000).toString());
             } else {
                 // Save form data under the generated registration number
                 ref.set(formData).then(() => {
