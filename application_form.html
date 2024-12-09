@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Form</title>
-    <!-- Site favicon -->
+    <title>Job Application Form</title>
+	<!-- Site favicon -->
         <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,275 +15,323 @@
             <div class="logo">
                 <a href="/">ExamCare</a>
             </div>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
+            
         </div>
     </header>
-    
+
     <div class="form-container">
         <form action="#" method="post" id="jobApplicationForm" enctype="multipart/form-data">
-            <h2>Job Application Form</h2>
-
-            <div class="input-group">
-                <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" name="fullName" required>
-            </div>
-
-            <div class="input-group">
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required>
-            </div>
-
-            <div class="input-group">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="fathersName">Father's Name:</label>
-                <input type="text" id="fathersName" name="fathersName" required>
-            </div>
-
-            <div class="input-group">
-                <label for="mobileNumber">Mobile Number:</label>
-                <input type="tel" id="mobileNumber" name="mobileNumber" required>
-            </div>
-
-            <div class="input-group">
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="input-group">
-                <label for="caste">Caste:</label>
-                <select id="caste" name="caste" required>
-                    <option value="">Select Caste</option>
-                    <option value="general">General</option>
-                    <option value="obc_a">OBC A</option>
-                    <option value="obc_b">OBC B</option>
-                    <option value="sc">SC</option>
-                    <option value="st">ST</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="religion">Religion:</label>
-                <select id="religion" name="religion" required>
-                    <option value="">Select Religion</option>
-                    <option value="hindu">Hindu</option>
-                    <option value="muslim">Muslim</option>
-                    <option value="sikh">Sikh</option>
-                    <option value="buddha">Buddha</option>
-                    <option value="jain">Jain</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="aadhaarNumber">Aadhaar Number:</label>
-                <input type="text" id="aadhaarNumber" name="aadhaarNumber" required>
-            </div>
-
-            <div class="input-group">
-                <label for="languages">Languages Known:</label>
-                <select id="languages" name="languages" multiple required>
-                    <option value="bengali">Bengali</option>
-                    <option value="english">English</option>
-                    <option value="hindi">Hindi</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="postApplyingFor">Post Applying For:</label>
-                <select id="postApplyingFor" name="postApplyingFor" required>
-                    <option value="">Select Post</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="data_entry">Data Entry</option>
-                    <option value="customer_service_executive">Customer Service Executive</option>
-                    <option value="internal_data_analyst">Internal Data Analyst</option>
-                    <option value="video_banner_editor">Video & Banner Editor</option>
-                </select>
-            </div>
-
-            <div class="input-group" id="subjectField" style="display: none;">
-                <label for="selectSubject">Select Subject:</label>
-                <select id="selectSubject" name="selectSubject">
-                    <option value="">Select Subject</option>
-                    <option value="english">English</option>
-                    <option value="history">History</option>
-                    <option value="geography">Geography</option>
-                    <option value="mathematics">Mathematics</option>
-                    <option value="hindi">Hindi</option>
-                    <option value="science">Science</option>
-                    <option value="general_knowledge">General Knowledge</option>
-                </select>
-            </div>
-
-            <h3>Present Address</h3>
-            <div class="input-group">
-                <label for="presentVillage">Village/Town/City:</label>
-                <input type="text" id="presentVillage" name="presentVillage" required>
-            </div>
-
-            <div class="input-group">
-                <label for="presentPostOffice">Post Office:</label>
-                <input type="text" id="presentPostOffice" name="presentPostOffice" required>
-            </div>
-
-            <div class="input-group">
-                <label for="presentPoliceStation">Police Station:</label>
-                <input type="text" id="presentPoliceStation" name="presentPoliceStation" required>
-            </div>
-
-            <div class="input-group">
-                <label for="presentDistrict">District:</label>
-                <select id="presentDistrict" name="presentDistrict" required>
-                    <option value="">Select District</option>
-                    <!-- Add all West Bengal districts here -->
-                    <option value="kolkata">Kolkata</option>
-                    <option value="howrah">Howrah</option>
-                    <option value="hooghly">Hooghly</option>
-                    <!-- Continue with other districts -->
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="presentState">State:</label>
-                <input type="text" id="presentState" name="presentState" value="West Bengal" readonly>
-            </div>
-
-            <div class="input-group">
-                <label for="presentPinCode">PIN Code:</label>
-                <input type="text" id="presentPinCode" name="presentPinCode" required>
-            </div>
-
-            <h3>Permanent Address</h3>
-            <div class="input-group">
-                <label for="sameAsPresent">
-                    <input type="checkbox" id="sameAsPresent"> Same as Present
-                </label>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentVillage">Village/Town/City:</label>
-                <input type="text" id="permanentVillage" name="permanentVillage" required>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentPostOffice">Post Office:</label>
-                <input type="text" id="permanentPostOffice" name="permanentPostOffice" required>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentPoliceStation">Police Station:</label>
-                <input type="text" id="permanentPoliceStation" name="permanentPoliceStation" required>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentDistrict">District:</label>
-                <select id="permanentDistrict" name="permanentDistrict" required>
-                    <option value="">Select District</option>
-                    <!-- Add all West Bengal districts here -->
-                    <option value="kolkata">Kolkata</option>
-                    <option value="howrah">Howrah</option>
-                    <option value="hooghly">Hooghly</option>
-                    <!-- Continue with other districts -->
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentState">State:</label>
-                <input type="text" id="permanentState" name="permanentState" value="West Bengal" readonly>
-            </div>
-
-            <div class="input-group">
-                <label for="permanentPinCode">PIN Code:</label>
-                <input type="text" id="permanentPinCode" name="permanentPinCode" required>
-            </div>
-
-            <h3 id="qualificationsTitle" style="display:none;">Qualifications</h3>
-           
-            <div id="qualificationsSection" style="display: none;">
-                <div class="qualification" id="qualification10th">
-                    <h4>10th</h4>
-                    <div class="input-group">
-                        <label for="board10th">Board Name:</label>
-                        <input type="text" id="board10th" name="board10th" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="passingYear10th">Passing Year:</label>
-                        <input type="text" id="passingYear10th" name="passingYear10th" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="fullMarks10th">Full Marks:</label>
-                        <input type="text" id="fullMarks10th" name="fullMarks10th" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="marksObtained10th">Marks Obtained:</label>
-                        <input type="text" id="marksObtained10th" name="marksObtained10th" required>
-                    </div>
+            <!-- Part 1 -->
+            <div id="part1">
+                <h2>Application Form</h2>
+                <div class="input-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
                 </div>
-                <div class="qualification" id="qualification12th" class="hidden">
-                    <h4>12th</h4>
-                    <div class="input-group">
-                        <label for="board12th">Board Name:</label>
-                        <input type="text" id="board12th" name="board12th">
-                    </div>
-                    <div class="input-group">
-                        <label for="passingYear12th">Passing Year:</label>
-                        <input type="text" id="passingYear12th" name="passingYear12th">
-                    </div>
-                    <div class="input-group">
-                        <label for="fullMarks12th">Full Marks:</label>
-                        <input type="text" id="fullMarks12th" name="fullMarks12th">
-                    </div>
-                    <div class="input-group">
-                        <label for="marksObtained12th">Marks Obtained:</label>
-                        <input type="text" id="marksObtained12th" name="marksObtained12th">
-                    </div>
+
+                <div class="input-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
                 </div>
-                <div class="qualification" id="qualificationGraduation" class="hidden">
-                    <h4>Graduation</h4>
-                    <div class="input-group">
-                        <label for="boardGraduation">University Name:</label>
-                        <input type="text" id="boardGraduation" name="boardGraduation">
-                    </div>
-                    <div class="input-group">
-                        <label for="passingYearGraduation">Passing Year:</label>
-                        <input type="text" id="passingYearGraduation" name="passingYearGraduation">
-                    </div>
-                    <div class="input-group">
-                        <label for="fullMarksGraduation">Full Marks:</label>
-                        <input type="text" id="fullMarksGraduation" name="fullMarksGraduation">
-                    </div>
-                    <div class="input-group">
-                        <label for="marksObtainedGraduation">Marks Obtained:</label>
-                        <input type="text" id="marksObtainedGraduation" name="marksObtainedGraduation">
-                    </div>
+
+                <div class="input-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="fathersName">Father's Name:</label>
+                    <input type="text" id="fathersName" name="fathersName" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="mobileNumber">Mobile Number:</label>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="caste">Caste:</label>
+                    <select id="caste" name="caste" required>
+                        <option value="" disabled selected>Select Caste</option>
+                        <option value="general">General</option>
+                        <option value="obc_a">OBC A</option>
+                        <option value="obc_b">OBC B</option>
+                        <option value="sc">SC</option>
+                        <option value="st">ST</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="religion">Religion:</label>
+                    <select id="religion" name="religion" required>
+                        <option value="" disabled selected>Select Religion</option>
+                        <option value="hindu">Hindu</option>
+                        <option value="muslim">Muslim</option>
+                        <option value="sikh">Sikh</option>
+                        <option value="buddha">Buddha</option>
+                        <option value="jain">Jain</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="aadhaarNumber">Aadhaar Number:</label>
+                    <input type="number" id="aadhaarNumber" name="aadhaarNumber" required>
+                </div>
+
+                <button type="button" id="continue1" class="nav-button full-width">Continue</button>
+            </div>
+            <!-- Part 2 -->
+            <div id="part2" style="display: none;">
+                <div class="input-group">
+                    <label for="languages">Languages Known:</label>
+                    <select id="languages" name="languages" multiple required>
+                        <option value="bengali">Bengali</option>
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="postApplyingFor">Post Applying For:</label>
+                    <select id="postApplyingFor" name="postApplyingFor" required>
+                        <option value="" disabled selected>Select Post</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="data_entry">Data Entry</option>
+                        <option value="customer_service_executive">Customer Service Executive</option>
+                        <option value="internal_data_analyst">Internal Data Analyst</option>
+                        <option value="video_banner_editor">Video & Banner Editor</option>
+                    </select>
+                </div>
+
+                <div class="input-group" id="subjectField" style="display: none;">
+                    <label for="selectSubject">Select Subject:</label>
+                    <select id="selectSubject" name="selectSubject">
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="english">English</option>
+                        <option value="history">History</option>
+                        <option value="geography">Geography</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="science">Science</option>
+                        <option value="general_knowledge">General Knowledge</option>
+                    </select>
+                </div>
+
+                <h3>Present Address</h3>
+                <div class="input-group">
+                    <label for="presentVillage">Village/Town/City:</label>
+                    <input type="text" id="presentVillage" name="presentVillage" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="presentPostOffice">Post Office:</label>
+                    <input type="text" id="presentPostOffice" name="presentPostOffice" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="presentPoliceStation">Police Station:</label>
+                    <input type="text" id="presentPoliceStation" name="presentPoliceStation" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="presentDistrict">District:</label>
+                    <select id="presentDistrict" name="presentDistrict" required>
+                        <option value="" disabled selected>Select District</option>
+                        <option value="alipurduar">Alipurduar</option>
+<option value="bankura">Bankura</option>
+<option value="birbhum">Birbhum</option>
+<option value="coochbehar">Cooch Behar</option>
+<option value="darjeeling">Darjeeling</option>
+<option value="dakshindinajpur">Dakshin Dinajpur</option>
+<option value="hooghly">Hooghly</option>
+<option value="howrah">Howrah</option>
+<option value="jalpaiguri">Jalpaiguri</option>
+<option value="jhargram">Jhargram</option>
+<option value="kalimpong">Kalimpong</option>
+<option value="kolkata">Kolkata</option>
+<option value="malda">Malda</option>
+<option value="murshidabad">Murshidabad</option>
+<option value="nadia">Nadia</option>
+<option value="north24paragnas">North 24 Parganas</option>
+<option value="paschimmedinipur">Paschim Medinipur</option>
+<option value="paschimbardhaman">Paschim Bardhaman</option>
+<option value="purbaardhaman">Purba Bardhaman</option>
+<option value="purbaemedinipur">Purba Medinipur</option>
+<option value="purulia">Purulia</option>
+<option value="south24paragnas">South 24 Parganas</option>
+<option value="uttardinajpur">Uttar Dinajpur</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="presentState">State:</label>
+                    <input type="text" id="presentState" name="presentState" value="West Bengal" readonly>
+                </div>
+
+                <div class="input-group">
+                    <label for="presentPinCode">PIN Code:</label>
+                    <input type="number" id="presentPinCode" name="presentPinCode" required>
+                </div>
+
+                <h3>Permanent Address</h3>
+                <div class="input-group">
+                    <label for="sameAsPresent">
+                        <input type="checkbox" id="sameAsPresent"> Same as Present
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentVillage">Village/Town/City:</label>
+                    <input type="text" id="permanentVillage" name="permanentVillage" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentPostOffice">Post Office:</label>
+                    <input type="text" id="permanentPostOffice" name="permanentPostOffice" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentPoliceStation">Police Station:</label>
+                    <input type="text" id="permanentPoliceStation" name="permanentPoliceStation" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentDistrict">District:</label>
+                    <select id="permanentDistrict" name="permanentDistrict" required>
+                        <option value="" disabled selected>Select District</option>
+                        <option value="alipurduar">Alipurduar</option>
+<option value="bankura">Bankura</option>
+<option value="birbhum">Birbhum</option>
+<option value="coochbehar">Cooch Behar</option>
+<option value="darjeeling">Darjeeling</option>
+<option value="dakshindinajpur">Dakshin Dinajpur</option>
+<option value="hooghly">Hooghly</option>
+<option value="howrah">Howrah</option>
+<option value="jalpaiguri">Jalpaiguri</option>
+<option value="jhargram">Jhargram</option>
+<option value="kalimpong">Kalimpong</option>
+<option value="kolkata">Kolkata</option>
+<option value="malda">Malda</option>
+<option value="murshidabad">Murshidabad</option>
+<option value="nadia">Nadia</option>
+<option value="north24paragnas">North 24 Parganas</option>
+<option value="paschimmedinipur">Paschim Medinipur</option>
+<option value="paschimbardhaman">Paschim Bardhaman</option>
+<option value="purbaardhaman">Purba Bardhaman</option>
+<option value="purbaemedinipur">Purba Medinipur</option>
+<option value="purulia">Purulia</option>
+<option value="south24paragnas">South 24 Parganas</option>
+<option value="uttardinajpur">Uttar Dinajpur</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentState">State:</label>
+                    <input type="text" id="permanentState" name="permanentState" value="West Bengal" readonly>
+                </div>
+
+                <div class="input-group">
+                    <label for="permanentPinCode">PIN Code:</label>
+                    <input type="number" id="permanentPinCode" name="permanentPinCode" required>
+                </div>
+
+                <div class="nav-buttons-container">
+                    <button type="button" id="prev2" class="nav-button half-width" style="display: none;">Previous</button>
+                    <button type="button" id="continue2" class="nav-button full-width">Continue</button>
                 </div>
             </div>
 
-            <h3 id="totalPayable" style="display:none;">Total Payable : N/A</h3>
+            <!-- Part 3 -->
+            <div id="part3" style="display: none;">
+                <h3 id="qualificationsTitle" style="display:none;">Qualifications</h3>
+                <div id="qualificationsSection" style="display: none;">
+                    <div class="qualification" id="qualification10th">
+                        <h4>10th</h4>
+                        <div class="input-group">
+                            <label for="board10th">Board Name:</label>
+                            <input type="text" id="board10th" name="board10th" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="passingYear10th">Passing Year:</label>
+                            <input type="number" id="passingYear10th" name="passingYear10th" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="fullMarks10th">Full Marks:</label>
+                            <input type="number" id="fullMarks10th" name="fullMarks10th" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="marksObtained10th">Marks Obtained:</label>
+                            <input type="number" id="marksObtained10th" name="marksObtained10th" required>
+                        </div>
+                    </div>
+                    <div class="qualification" id="qualification12th" class="hidden">
+                        <h4>12th</h4>
+                        <div class="input-group">
+                            <label for="board12th">Board Name:</label>
+                            <input type="text" id="board12th" name="board12th">
+                        </div>
+                        <div class="input-group">
+                            <label for="passingYear12th">Passing Year:</label>
+                            <input type="number" id="passingYear12th" name="passingYear12th">
+                        </div>
+                        <div class="input-group">
+                            <label for="fullMarks12th">Full Marks:</label>
+                            <input type="number" id="fullMarks12th" name="fullMarks12th">
+                        </div>
+                        <div class="input-group">
+                            <label for="marksObtained12th">Marks Obtained:</label>
+                            <input type="number" id="marksObtained12th" name="marksObtained12th">
+                        </div>
+                    </div>
+                    <div class="qualification" id="qualificationGraduation" class="hidden">
+                        <h4>Graduation</h4>
+                        <div class="input-group">
+                            <label for="boardGraduation">University Name:</label>
+                            <input type="text" id="boardGraduation" name="boardGraduation">
+                        </div>
+                        <div class="input-group">
+                            <label for="passingYearGraduation">Passing Year:</label>
+                            <input type="number" id="passingYearGraduation" name="passingYearGraduation">
+                        </div>
+                        <div class="input-group">
+                            <label for="fullMarksGraduation">Full Marks:</label>
+                            <input type="number" id="fullMarksGraduation" name="fullMarksGraduation">
+                        </div>
+                        <div class="input-group">
+                            <label for="marksObtainedGraduation">Marks Obtained:</label>
+                            <input type="number" id="marksObtainedGraduation" name="marksObtainedGraduation">
+                        </div>
+                    </div>
+                </div>
 
-            <button type="submit">Continue to Payment</button>
+                <h3 id="totalPayable" style="display:none;">Total Payable : N/A</h3>
+
+                <div class="nav-buttons-container">
+                    <button type="button" id="prev3" class="nav-button half-width" style="display: none;">Previous</button>
+                    <button type="submit" id="submit" class="nav-button full-width">Continue to Payment</button>
+                </div>
+            </div>
         </form>
     </div>
-    <br/><br/><br/>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="scripts.js"></script>
     <script>
-    	document.querySelector('.hamburger-menu').addEventListener('click', function() {
-    document.querySelector('.nav-menu').classList.toggle('active');
-});
-    	</script>
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+    </script>
 </body>
-                                                                </html>
+</html>
