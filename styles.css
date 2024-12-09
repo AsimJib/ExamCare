@@ -132,7 +132,6 @@ button {
     border: none;
     padding: 10px;
     border-radius: 4px;
-    width: 100%;
     cursor: pointer;
     font-size: 16px;
 }
@@ -148,6 +147,29 @@ button:hover {
 h4 {
     margin-top: 0;
     color: #555;
+}
+
+.nav-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-button {
+    width: 100%;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.half-width {
+    width: 48%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+button + button {
+    margin-left: 4%;
 }
 
 /* Responsive Design */
