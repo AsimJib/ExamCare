@@ -180,7 +180,8 @@ function initiatePayment(amount) {
             }
         },
         "method": {
-            "upi": true // Enable UPI payments
+            "upi": true, // Enable UPI payments
+            "enable": { "upi_intent": true } // Enable UPI Intent in WebView
         }
     };
     var rzp1 = new Razorpay(options);
